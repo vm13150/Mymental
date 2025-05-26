@@ -1,0 +1,261 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Tipografia global */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    background-color: rgb(14, 209, 69);
+    padding: 10px 50px;
+}
+
+#logo img {
+    height: 50px;
+}
+
+#menu {
+    margin-left: auto;
+}
+
+#menu ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+#menu ul li a {
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    transition: 0.3s;
+}
+
+#menu ul li a:hover {
+    background-color: white;
+    color: rgb(14, 209, 69);
+    border-radius: 5px;
+}
+
+/* Títulos */
+h1, h3 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+p {
+    font-size: 16px;
+    padding: 0 20px;
+    text-align: center;
+}
+
+/* Artigos e botões */
+.divmental {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.quadrado, .quadrado2 {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid rgb(51, 151, 41);
+    border-radius: 5px;
+    text-decoration: none;
+    color: rgb(51, 151, 41);
+    font-weight: bold;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.quadrado:hover, .quadrado2:hover {
+    background-color: rgb(51, 151, 41);
+    color: white;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Login e Cadastro */
+.navigation {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.toggleButton {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.toggleButton.active {
+    background-color: #45a049;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="email"],
+.modal-content input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal-content button[type="submit"] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.modal-content button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Questionário */
+.container {
+    margin: 60px auto;
+    padding: 30px;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#progress-bar {
+    background-color: #34d399;
+    height: 8px;
+    width: 0;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    transition: width 0.3s ease;
+}
+
+#question-container h2 {
+    margin-bottom: 16px;
+}
+
+#options button,
+.option-button {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px;
+    border-radius: 5px;
+    border: 1px solid #34d399;
+    background-color: white;
+    cursor: pointer;
+    text-align: left;
+    color: #333;
+    transition: 0.3s;
+}
+
+.option-button.selected {
+    background-color: #339729 !important;
+    color: white !important;
+}
+
+#options button:hover,
+.option-button:hover {
+    background-color: #d1fae5;
+}
+
+/* Botões de navegação */
+.nextQuestion,
+.prevQuestion,
+.calculate-button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #34d399;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.nextQuestion:hover,
+.prevQuestion:hover,
+.calculate-button:hover {
+    background-color: #059669;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    #menu ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .modal-content {
+        width: 90%;
+    }
+
+    .divmental {
+        flex-direction: column;
+        align-items: center;
+    }
+}

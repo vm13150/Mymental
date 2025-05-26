@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sobre a Equipe - My-mental</title>
+    <link rel="stylesheet" href="cssmental.css">
+</head>
+<body>
+
+
+<header>
+    <div id="logo"><img src="logo.png" alt="Logo" width="50"></div>
+    <nav id="menu">
+        <ul>
+            <li><a href="mymental.html">Início</a></li>
+            <li><a href="Saudemental.html">Saúde Mental</a></li>
+            <li><a href="linkquest.html">Questionários</a></li>
+            <li><a href="sobre nos.html">Sobre nós</a></li>
+            <li><a href="#" onclick="openModal()">Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+<main>
+    <h1>Conheça nossa equipe</h1>
+    <div class="equipe">
+        <div class="membro">
+            <img src="imagens/vitormanuel.jpg" alt="vitor" width="100">
+            <h3>Vitor Manoel</h3>
+            <p>Ra:102962021</p>
+        </div>
+        <div class="membro">
+            <img src="imagens/holanda.jpg" alt="holanda" width="100">
+            <h3>Lucas Holanda</h3>
+            <p>Ra:111362023</p>
+        </div>
+        <div class="membro">
+            <img src="imagens/zamai.jpg" alt="zamai" width="100">
+            <h3>Lucas S Zamai</h3>
+            <p>Ra:100722023</p>
+        </div>
+    </div>
+</main>
+<!-- Login -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <!-- Botões de troca -->
+        <div class="navigation">
+            <button onclick="showLogin()" class="toggleButton" id="loginButton">Login</button>
+            <button onclick="showCadastro()" class="toggleButton" id="cadastroButton">Cadastro</button>
+        </div>
+
+        <!-- Formulário de Login -->
+        <form id="loginForm" action="login.php" method="POST">
+            <input type="email" name="email" placeholder="Digite seu e-mail" required>
+            <input type="password" name="senha" placeholder="Digite sua senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+
+        <!-- Formulário de Cadastro -->
+        <form id="cadastroForm" action="cadastro.php" method="POST" style="display: none;">
+            <input type="text" name="nome" placeholder="Digite seu nome" required>
+            <input type="email" name="email" placeholder="Digite seu e-mail" required>
+            <input type="password" name="senha" placeholder="Digite sua senha" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</div>
+<script>
+    function openModal() {
+document.getElementById('loginModal').style.display = 'block';
+showLogin(); // Abre o Login por padrão
+}
+
+function closeModal() {
+document.getElementById('loginModal').style.display = 'none';
+}
+
+function showLogin() {
+document.getElementById('loginForm').style.display = 'block';
+document.getElementById('cadastroForm').style.display = 'none';
+document.getElementById('loginButton').classList.add('active');
+document.getElementById('cadastroButton').classList.remove('active');
+}
+
+function showCadastro() {
+document.getElementById('loginForm').style.display = 'none';
+document.getElementById('cadastroForm').style.display = 'block';
+document.getElementById('loginButton').classList.remove('active');
+document.getElementById('cadastroButton').classList.add('active');
+}
+
+// Fecha o modal se clicar fora dele
+window.onclick = function(event) {
+const modal = document.getElementById('loginModal');
+if (event.target === modal) {
+    closeModal();
+}
+}
+</script>
+</body>
+</html>

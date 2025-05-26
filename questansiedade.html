@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>My-mental - Teste de Ansiedade</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="cssmental.css">
+</head>
+<body>
+    <header>
+        <div id="logo"><img src="logo.png" width="50" alt="Logo"></div>
+        <nav id="menu">
+            <ul>
+                <li> <a href="mymental.html">Início</a></li>
+                <li> <a href="saudemental.html">Saúde Mental</a></li>
+                <li> <a href="linkquest.html">Questionários</a></li>
+                <li> <a href="saudemental.html">Sobre nós</a></li>
+                <li> <a href="#" onclick="openModal()">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <h1>Teste de Ansiedade</h1>
+    <div class="container">
+        <div id="progress-bar"></div>
+
+        <div id="question-container">
+            <h2 id="question"></h2>
+            <div id="options"></div>
+        </div>
+        
+        <div class="navigation" id="mudar">
+            <button onclick="prevQuestion()" class="prevQuestion">Anterior</button>
+            <button onclick="nextQuestion()" id="nextButton" class="nextQuestion" disabled>Próxima Pergunta</button>
+            <button onclick="calculateResult()" id="finishButton" class="calculate-button" style="display: none;">Finalizar Questionário</button>
+        </div>
+        
+
+        <div id="resultModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeResultModal()">&times;</span>
+                <h2>Resultado do Teste</h2>
+                <p id="resultText"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Login -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+
+            <div class="navigation-2">
+                <button onclick="showLogin()" class="toggleButton" id="loginButton">Login</button>
+                <button onclick="showCadastro()" class="toggleButton" id="cadastroButton">Cadastro</button>
+            </div>
+
+            <!-- Login -->
+            <form id="loginForm" action="login.php" method="POST">
+                <input type="email" name="email" placeholder="Digite seu e-mail" required>
+                <input type="password" name="senha" placeholder="Digite sua senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+
+            <!-- Cadastro -->
+            <form id="cadastroForm" action="cadastro.php" method="POST" style="display: none;">
+                <input type="text" name="nome" placeholder="Digite seu nome" required>
+                <input type="email" name="email" placeholder="Digite seu e-mail" required>
+                <input type="password" name="senha" placeholder="Digite sua senha" required>
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+<script>
+    const questions = [
+        { question: 'Costumo me preocupar com coisas pequenas ou situações que ainda nem aconteceram.', options: [
+            { text: 'Concordo plenamente', points: 4 },
+            { text: 'Concordo parcialmente', points: 3 },
+            { text: 'Neutro', points: 2 },
+            { text: 'Discordo parcialmente', points: 1 },
+            { text: 'Discordo completamente', points: 0 }
+        ]},
+        { question: 'Tenho dificuldade em relaxar, mesmo quando estou em um ambiente calmo.', options: [
+            { text: 'Concordo plenamente', points: 4 },
+            { text: 'Concordo parcialmente', points: 3 },
+            { text: 'Neutro', points: 2 },
+            { text: 'Discordo parcialmente', points: 1 },
+            { text: 'Discordo completamente', points: 0 }
+        ]},
+        { question: 'Sinto meu coração acelerar ou respiro mais rápido quando estou nervoso(a), mesmo sem uma razão clara.', options: [
+            { text: 'Concordo plenamente', points: 4 },
+            { text: 'Concordo parcialmente', points: 3 },
+            { text: 'Neutro', points: 2 },
+            { text: 'Discordo parcialmente', points: 1 },
+            { text: 'Discordo completamente', points: 0 }
+        ]},
+        { question: 'Evito certas situações por medo de que algo ruim aconteça.', options: [
+            { text: 'Concordo plenamente', points: 4 },
+            { text: 'Concordo parcialmente', points: 3 },
+            { text: 'Neutro', points: 2 },
+            { text: 'Discordo parcialmente', points: 1 },
+            { text: 'Discordo completamente', points: 0 }
+        ]},
+        { question: 'Fico frequentemente com a sensação de que algo está prestes a dar errado.', options: [
+            { text: 'Concordo plenamente', points: 4 },
+            { text: 'Concordo parcialmente', points: 3 },
+            { text: 'Neutro', points: 2 },
+            { text: 'Discordo parcialmente', points: 1 },
+            { text: 'Discordo completamente', points: 0 }
+        ]},
+        { question: 'Tenho dificuldades para dormir por causa de pensamentos acelerados ou preocupações.', options: [
+            { text: 'Concordo plenamente', points: 4 },
+            { text: 'Concordo parcialmente', points: 3 },
+            { text: 'Neutro', points: 2 },
+            { text: 'Discordo parcialmente', points: 1 },
+            { text: 'Discordo completamente', points: 0 }
+        ]},
+        { question: 'Sinto tensão nos músculos, dor de cabeça ou desconforto físico sem motivo aparente.', options: [
+            { text: 'Concordo plenamente', points: 4 },
+            { text: 'Concordo parcialmente', points: 3 },
+            { text: 'Neutro', points: 2 },
+            { text: 'Discordo parcialmente', points: 1 },
+            { text: 'Discordo completamente', points: 0 }
+        ]},
+        { question: 'Fico irritado(a) ou impaciente com facilidade, mesmo por coisas simples.', options: [
+            { text: 'Concordo plenamente', points: 4 },
+            { text: 'Concordo parcialmente', points: 3 },
+            { text: 'Neutro', points: 2 },
+            { text: 'Discordo parcialmente', points: 1 },
+            { text: 'Discordo completamente', points: 0 }
+        ]},
+        { question: 'Me preocupo tanto com o que os outros pensam que evito falar em público ou interagir socialmente.', options: [
+            { text: 'Concordo plenamente', points: 4 },
+            { text: 'Concordo parcialmente', points: 3 },
+            { text: 'Neutro', points: 2 },
+            { text: 'Discordo parcialmente', points: 1 },
+            { text: 'Discordo completamente', points: 0 }
+        ]},
+        { question: 'Já senti que minha ansiedade me impediu de realizar atividades importantes no meu dia a dia.', options: [
+            { text: 'Concordo plenamente', points: 4 },
+            { text: 'Concordo parcialmente', points: 3 },
+            { text: 'Neutro', points: 2 },
+            { text: 'Discordo parcialmente', points: 1 },
+            { text: 'Discordo completamente', points: 0 }
+        ]}
+    ];
+
+    let currentQuestion = 0;
+const answers = Array(questions.length).fill(null);
+
+function updateQuestion() {
+    const q = questions[currentQuestion];
+    document.getElementById('question').innerText = `Pergunta ${currentQuestion + 1}: ${q.question}`;
+    const optionsContainer = document.getElementById('options');
+    optionsContainer.innerHTML = '';
+    document.getElementById('finishButton').disabled = answers[currentQuestion] === null;
+    if (currentQuestion === questions.length - 1) {
+    document.getElementById('finishButton').disabled = false;
+}
+
+
+
+    q.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.innerText = option.text;
+        btn.className = 'option-button';
+
+        if (answers[currentQuestion] === option.points) {
+            btn.classList.add('selected');
+        }
+
+        btn.onclick = () => selectOption(index, btn);
+        optionsContainer.appendChild(btn);
+    });
+
+    const progress = ((currentQuestion + 1) / questions.length) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+
+    document.getElementById('nextButton').disabled = true;
+
+    document.getElementById('nextButton').style.display = currentQuestion === questions.length - 1 ? 'none' : 'inline-block';
+    document.getElementById('finishButton').style.display = currentQuestion === questions.length - 1 ? 'inline-block' : 'none';
+}
+
+function nextQuestion() {
+    if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        updateQuestion();
+    }
+}
+
+function prevQuestion() {
+    if (currentQuestion > 0) {
+        currentQuestion--;
+        updateQuestion();
+    } else {
+        alert("Você ainda está na primeira questão!");
+    }
+}
+    function selectOption(index, button) {
+        answers[currentQuestion] = questions[currentQuestion].options[index].points;
+
+        document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+        answers[currentQuestion] = questions[currentQuestion].options[index].points;
+
+        document.querySelectorAll('.option-button').forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+
+    // Habilita o botão após selecionar uma resposta
+        document.getElementById('nextButton').disabled = false;
+    }
+
+    function calculateResult() {
+        const totalPoints = answers.reduce((sum, points) => sum + (points || 0), 0);
+        let resultMessage = "";
+
+        if (totalPoints <= 10) {
+            resultMessage = `Seu total de pontos é: ${totalPoints}. Baixo nível de ansiedade.`;
+        } else if (totalPoints <= 24) {
+            resultMessage = `Seu total de pontos é: ${totalPoints}. Ansiedade moderada.`;
+        } else {
+            resultMessage = `Seu total de pontos é: ${totalPoints}. Alto nível de ansiedade. Recomendamos procurar ajuda profissional.`;
+        }
+
+        document.getElementById('resultText').innerText = resultMessage;
+        document.getElementById('resultModal').style.display = 'block';
+    }
+
+    function closeResultModal() {
+        document.getElementById('resultModal').style.display = 'none';
+    }
+
+    function openModal() {
+        document.getElementById('loginModal').style.display = 'block';
+        showLogin();
+    }
+
+    function closeModal() {
+        document.getElementById('loginModal').style.display = 'none';
+    }
+
+    function showLogin() {
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('cadastroForm').style.display = 'none';
+    }
+
+    function showCadastro() {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('cadastroForm').style.display = 'block';
+    }
+
+    window.onclick = function(event) {
+        const loginModal = document.getElementById('loginModal');
+        if (event.target === loginModal) {
+            closeModal();
+        }
+    };
+
+    updateQuestion();
+</script>
+</body>
+</html>
+

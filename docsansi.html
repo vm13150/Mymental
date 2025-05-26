@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>My-mental-Sobre nós</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="cssmental.css">
+    </head>
+    <body>
+      <header>
+        <div id="logo"><img src="logo" width="50"></div>
+        <nav id="menu">
+            <ul>
+                <li> <a href="mymental">Inicio</a></li>
+                <li> <a href="Saudemental.html">Saude Mental</a></li>
+                <li> <a href="linkquest">Questionarios</a></li>
+                <li> <a href="sobre nos.html">Sobre nos</a></li>
+                <li> <a href="#" onclick="openModal()">Login</a></li>
+            </ul>
+    </header>
+    <h1>Ansiedade</h1>
+    <br>
+    <h2>Ansiedade Oque é?</h2>
+    <br>
+    <p>Ansiedade é um sentimento de preocupação, medo ou apreensão em relação ao futuro. Todos sentimos ansiedade em algum momento, como antes de uma prova, uma entrevista de emprego ou uma apresentação. No entanto, quando esses sentimentos são persistentes e desproporcionais à situação, pode-se tratar de um transtorno de ansiedade.
+    </p>
+    <ul>
+        <li>Transtorno de Ansiedade Generalizada (TAG): preocupação constante e excessiva com várias situações do dia a dia.
+        </li>
+        <li>Transtorno do Pânico: ataques repentinos de medo intenso.</li>
+        <li>Fobias específicas: medo irracional de algo, como altura, aranhas ou voar.</li>
+        <li>Ansiedade social: medo excessivo de interações sociais ou de ser julgado pelos outros.</li>
+    <a href=”imgem do conceito de ansiedade”></a>
+    </ul>
+    <h2>Sistomas</h2>
+    <br>
+    <p>A  ansiedade pode se manifestar tanto física quanto emocionalmente. Alguns sintomas incluem:</p>
+    <ul>
+        <li>Aceleração dos batimentos cardíacos</li>
+  
+      <li>-Suor excessivo</li>
+        <li>-Dificuldade para respirar</li>
+        <li>-Tensão muscular</li>
+        <li>-Preocupações constantes</li>
+        <li>-Dificuldade de concentração</li>
+    </ul>
+    <a href=”imagem com grafico da ansiedade”></a>
+    <h1>Efeitos da tecnologia na ansiedade</h1>
+    <p>A tecnologia pode ter dois papéis importantes na ansiedade: como fator de risco e como ferramenta de apoio</p>
+    <ul>
+       <li><strong>Como fator de risco</strong>: o uso excessivo de redes sociais e a constante conectividade podem aumentar a comparação social, o medo de estar perdendo algo (FOMO), e reduzir o tempo de descanso mental, contribuindo para quadros ansiosos, especialmente entre jovens.
+</li>
+      <li><strong>Como ferramenta de apoio:</strong> por outro lado, aplicativos de meditação, terapia online e até mesmo jogos de relaxamento podem ajudar no controle da ansiedade. Plataformas digitais também facilitam o acesso a psicólogos, psiquiatras e grupos de apoio.
+</li>
+    </ul>
+<!-- Login -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <!-- Botões de troca -->
+        <div class="navigation">
+            <button onclick="showLogin()" class="toggleButton" id="loginButton">Login</button>
+            <button onclick="showCadastro()" class="toggleButton" id="cadastroButton">Cadastro</button>
+        </div>
+
+        <!-- Formulário de Login -->
+        <form id="loginForm" action="login.php" method="POST">
+            <input type="email" name="email" placeholder="Digite seu e-mail" required>
+            <input type="password" name="senha" placeholder="Digite sua senha" required>
+            <button type="submit">Entrar</button>
+        </form>
+
+        <!-- Formulário de Cadastro -->
+        <form id="cadastroForm" action="cadastro.php" method="POST" style="display: none;">
+            <input type="text" name="nome" placeholder="Digite seu nome" required>
+            <input type="email" name="email" placeholder="Digite seu e-mail" required>
+            <input type="password" name="senha" placeholder="Digite sua senha" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</div>
+<script>
+    function openModal() {
+document.getElementById('loginModal').style.display = 'block';
+showLogin(); // Abre o Login por padrão
+}
+
+function closeModal() {
+document.getElementById('loginModal').style.display = 'none';
+}
+
+function showLogin() {
+document.getElementById('loginForm').style.display = 'block';
+document.getElementById('cadastroForm').style.display = 'none';
+document.getElementById('loginButton').classList.add('active');
+document.getElementById('cadastroButton').classList.remove('active');
+}
+
+function showCadastro() {
+document.getElementById('loginForm').style.display = 'none';
+document.getElementById('cadastroForm').style.display = 'block';
+document.getElementById('loginButton').classList.remove('active');
+document.getElementById('cadastroButton').classList.add('active');
+}
+
+// Fecha o modal se clicar fora dele
+window.onclick = function(event) {
+const modal = document.getElementById('loginModal');
+if (event.target === modal) {
+    closeModal();
+}
+}
+</script>
