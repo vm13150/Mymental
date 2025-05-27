@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <title>My-mental</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="cssmental.css">
-    </head>
-    <body>
-      <header>
-        <div id="logo"><img src="logo" width="50"></div>
+<head>
+    <title>My-mental</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="cssmental.css">
+</head>
+<body>
+    <header>
+        <div id="logo"><img src="logomental.jpg" width="50"></div>
         <nav id="menu">
             <ul>
-                <li> <a href="mymental.html">Inicio</a></li>
-                <li> <a href="saudemental.html">Saude Mental</a></li>
-                <li> <a href="linkquest.html">Questionarios</a></li>
-                <li> <a href="sobre nos.html">Sobre nos</a></li>
-                <li> <a href="#" onclick="openModal()">Login</a></li>
-
+                <li><a href="index.html">Início</a></li>
+                <li><a href="saudemental.html">Saúde Mental</a></li>
+                <li><a href="linkquest.html">Questionários</a></li>
+                <li><a href="sobre nos.html">Sobre nós</a></li>
+                <li><a href="#" onclick="openModal()">Login</a></li>
             </ul>
+        </nav>
     </header>
+
     <h1>Bem-vindo ao MyMental!</h1><br>
-    <img src="logo" width="50" id="logo2">
-    <br><br>
-    <h2>Funçoes do nosso site</h2><br>
+    <img src="logomental.jpg" width="50" id="logo2"><br><br>
+
+    <h2>Funções do nosso site</h2><br>
+
     <div class="funcao-container">
         <img src="imagem.png" width="100" alt="Imagem">
         <div class="funcao-texto">
@@ -30,35 +32,38 @@
             <a href="saudemental.html" class="quadrado2">Clique aqui para ver mais sobre os artigos!</a>
         </div>
     </div>
-    <br><Br><br>
+
+    <br><br><br>
+
     <div class="quest-contaneir">
         <img src="imagem.png" width="100" alt="Imagem">
-        <div class="quest-texto" >
+        <div class="quest-texto">
             <h3>Testes de autoavaliação:</h3>
             <p>Temos testes de personalidades, para sua autoavaliação. Entender a si mesmo é o início do tratamento das deficiências mentais!</p>
-            <a href="linkquest.html" class="quadrado">    Clique aqui para ver mais!    </a>
+            <a href="linkquest.html" class="quadrado">Clique aqui para ver mais!</a>
         </div>
-    </div> 
-         <!-- Login -->
+    </div>
+
+    <!-- Login -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
-    
+
             <!-- Botões de troca -->
             <div class="navigation">
                 <button onclick="showLogin()" class="toggleButton" id="loginButton">Login</button>
                 <button onclick="showCadastro()" class="toggleButton" id="cadastroButton">Cadastro</button>
             </div>
-    
+
             <!-- Formulário de Login -->
-            <form id="loginForm" action="login.php" method="POST">
+            <form id="loginForm">
                 <input type="email" name="email" placeholder="Digite seu e-mail" required>
                 <input type="password" name="senha" placeholder="Digite sua senha" required>
                 <button type="submit">Entrar</button>
             </form>
-    
+
             <!-- Formulário de Cadastro -->
-            <form id="cadastroForm" action="cadastro.php" method="POST" style="display: none;">
+            <form id="cadastroForm" style="display: none;">
                 <input type="text" name="nome" placeholder="Digite seu nome" required>
                 <input type="email" name="email" placeholder="Digite seu e-mail" required>
                 <input type="password" name="senha" placeholder="Digite sua senha" required>
@@ -66,39 +71,41 @@
             </form>
         </div>
     </div>
+
     <script>
         function openModal() {
-    document.getElementById('loginModal').style.display = 'block';
-    showLogin(); // Abre o Login por padrão
-}
+            document.getElementById('loginModal').style.display = 'block';
+            showLogin();
+        }
 
-function closeModal() {
-    document.getElementById('loginModal').style.display = 'none';
-}
+        function closeModal() {
+            document.getElementById('loginModal').style.display = 'none';
+        }
 
-function showLogin() {
-    document.getElementById('loginForm').style.display = 'block';
-    document.getElementById('cadastroForm').style.display = 'none';
-    document.getElementById('loginButton').classList.add('active');
-    document.getElementById('cadastroButton').classList.remove('active');
-}
+        function showLogin() {
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('cadastroForm').style.display = 'none';
+            document.getElementById('loginButton').classList.add('active');
+            document.getElementById('cadastroButton').classList.remove('active');
+        }
 
-function showCadastro() {
-    document.getElementById('loginForm').style.display = 'none';
-    document.getElementById('cadastroForm').style.display = 'block';
-    document.getElementById('loginButton').classList.remove('active');
-    document.getElementById('cadastroButton').classList.add('active');
-}
+        function showCadastro() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('cadastroForm').style.display = 'block';
+            document.getElementById('loginButton').classList.remove('active');
+            document.getElementById('cadastroButton').classList.add('active');
+        }
 
-// Fecha o modal se clicar fora dele
-window.onclick = function(event) {
-    const modal = document.getElementById('loginModal');
-    if (event.target === modal) {
-        closeModal();
-    }
-}
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
     </script>
-    
+</body>
+</html>
+
 
 
     
